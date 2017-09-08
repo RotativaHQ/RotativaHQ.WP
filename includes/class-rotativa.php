@@ -154,6 +154,12 @@ class Rotativa {
 
 		$plugin_admin = new Rotativa_Admin( $this->get_plugin_name(), $this->get_version() );
 
+		// Hook our settings page
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_settings_page' );
+
+		// Hook our settings
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
+
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 

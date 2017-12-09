@@ -429,4 +429,108 @@ class Rotativa_Admin {
 
 	}
 
+	/**
+	 * Add plugin actions links.
+	 *
+	 * @since 1.0.0
+	 */
+	 public function action_links( $links ) {
+
+		 $links[] = '<a href="'. esc_url( get_admin_url(null, 'tools.php?page=rotativa') ) .'">' . __( 'Settings', 'rotativa' ) . '</a>';
+
+		 return $links;
+
+	 }
+
+	 public function register_metabox() {
+
+		 $options = get_option( $this->plugin_name . '-settings' );
+		 $option = $options['post-types'];
+
+		 if ( isset( $option ) && ! empty( $option ) ) {
+
+			 add_meta_box(
+				 'rotativa-side-metabox',
+				 __( 'RotativaHQ', 'rotativa' ),
+				 [ $this, 'display_metabox' ],
+				 $option,
+				 'side'
+			 );
+
+		 }
+
+	 }
+
+	 public function display_metabox() {
+
+		 ?>
+		 	<div class="rotativa-hq-metabox">
+				<button class="button toggle-popup"><?php echo esc_html__( 'Generate a PDF', 'rotativa' ); ?></button>
+				<span class="spinner"></span>
+			</div>
+			<div class="rotativa-hq-popup-settings">
+				<div class="inner-scroll">
+					<div class="rotativa-hq-popup-settings-overlay"></div>
+					<div class="inner">
+						<div class="field">
+							<label class="label" for="pdf-item-file-name"><?php echo esc_html__( 'File Name:', 'rotativa' ); ?></label>
+							<div class="control">
+								<input class="input" type="text" id="pdf-item-file-name" name="pdf-item-file-name" value="">
+							</div>
+						</div>
+						<a href="#" class="toggle-additional-pdf-settings"><?php echo esc_html__( 'Additional Settings', 'rotativa' ); ?></a>
+						<div class="additional-pdf-settings">
+							<div class="columns">
+								<div class="column is-half">
+									<div class="field">
+										<label class="label" for="pdf-item-margin-top"><?php echo esc_html__( 'Page Top Margin:', 'rotativa' ); ?></label>
+										<div class="control">
+											<input class="input" type="number" id="pdf-item-margin-top" name="pdf-item-margin-top" value="">
+										</div>
+									</div>
+								</div>
+								<div class="column is-half">
+									<div class="field">
+										<label class="label" for="pdf-item-margin-right"><?php echo esc_html__( 'Page Right Margin:', 'rotativa' ); ?></label>
+										<div class="control">
+											<input class="input" type="number" id="pdf-item-margin-right" name="pdf-item-margin-right" value="">
+										</div>
+									</div>
+								</div>
+								<div class="column is-half">
+									<div class="field">
+										<label class="label" for="pdf-item-margin-bottom"><?php echo esc_html__( 'Page Bottom Margin:', 'rotativa' ); ?></label>
+										<div class="control">
+											<input class="input" type="number" id="pdf-item-margin-bottom" name="pdf-item-margin-bottom" value="">
+										</div>
+									</div>
+								</div>
+								<div class="column is-half">
+									<div class="field">
+										<label class="label" for="pdf-item-margin-left"><?php echo esc_html__( 'Page Left Margin:', 'rotativa' ); ?></label>
+										<div class="control">
+											<input class="input" type="number" id="pdf-item-margin-left" name="pdf-item-margin-left" value="">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="field">
+							  <div class="control">
+							    <label class="checkbox" for="pdf-item-grayscale">
+							      <input type="checkbox" id="pdf-item-grayscale" name="pdf-item-grayscale">
+							      <?php echo esc_html__( 'Is Grayscale?', 'rotativa' ); ?>
+							    </label>
+							  </div>
+							</div>
+						</div>
+						<div>
+							<button class="button button-primary rotativa-generate-pdf" data-object-id="<?php echo esc_attr( get_the_ID() ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'rotativa_generate_pdf_nonce' ) ); ?>"><?php echo esc_html__( 'Generate a PDF', 'rotativa' ); ?></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		 <?php
+
+	 }
+
 }

@@ -163,6 +163,11 @@ class Rotativa {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		// Hook our plugin links
+		$this->loader->add_action( 'plugin_action_links_rotativa/rotativa.php', $plugin_admin, 'action_links' );
+
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'register_metabox' );
+
 	}
 
 	/**

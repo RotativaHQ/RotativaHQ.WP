@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Rotativa.HQ PDF Generator ===
 Contributors: rotativahq, ratkosolaja
 Donate link: https://rotativahq.com/
 Tags: html, pdf, cloud

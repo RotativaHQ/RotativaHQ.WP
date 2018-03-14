@@ -96,7 +96,25 @@ class Rotativa_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-admin.js', array( 'jquery' ), $this->version, false );
+        $options = get_option( $this->plugin_name . '-settings' );
+        $api_key = $options['api-key'];
+        $endpoint = $options['end-point-location'];
+
+        wp_enqueue_script( $this->plugin_name . '-axios', '//unpkg.com/axios/dist/axios.min.js', array( 'jquery' ), '0.18.0', true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-admin.js', array( 'jquery' ), $this->version, true );
+        if ( isset( $api_key ) && isset( $endpoint ) && ! empty( $api_key ) && ! empty( $endpoint ) ) {
+
+            wp_localize_script(
+                $this->plugin_name,
+                'rotativa',
+                [
+                    'api_key'   => $api_key,
+                    'endpoint'  => $endpoint,
+                    'permalink' => esc_url( get_permalink( get_the_ID() ) )
+                ]
+            );
+
+        }
 
 	}
 

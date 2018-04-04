@@ -35,12 +35,17 @@ jQuery(document).ready(function($) {
 	$('.rotativa-generate-pdf').on('click', function(event) {
 		event.preventDefault();
 
-		var file_name = $('#pdf-item-file-name').val(),
-			margin_top = $('#pdf-item-margin-top').val(),
-			margin_right = $('#pdf-item-margin-right').val(),
+		var file_name     = $('#pdf-item-file-name').val(),
+			margin_top    = $('#pdf-item-margin-top').val(),
+			margin_right  = $('#pdf-item-margin-right').val(),
 			margin_bottom = $('#pdf-item-margin-bottom').val(),
-			margin_left = $('#pdf-item-margin-left').val(),
-			gray = false;
+			margin_left   = $('#pdf-item-margin-left').val(),
+			gray          = false,
+			nonce         = $(this).data('nonce'),
+			id            = $(this).data('id'),
+			label         = $(this).html(),
+			label_active  = $(this).data( 'active-label' ),
+			button        = $(this);
 
 		if ( $('#pdf-item-grayscale').is(':checked') ) {
 
@@ -78,6 +83,40 @@ jQuery(document).ready(function($) {
 
         }
 
-        // Create AJAX function and send there everything.
+        $.ajax({
+        	type: 'POST',
+        	url: rotativa.ajaxurl,
+        	data: {
+        		file_name: file_name,
+        		margin_top: margin_top,
+        		margin_right: margin_right,
+        		margin_bottom: margin_bottom,
+        		margin_left: margin_left,
+        		gray: gray,
+        		nonce: nonce,
+        		id: id,
+        		action: 'ajax_generate_pdf'
+        	},
+        	beforeSend: function( before ) {
+
+        	    button.html( label_active );
+
+        	},
+        	success: function( response ) {
+
+        		console.log( response );
+
+        	},
+        	error: function( response ) {
+
+        	    console.log( response );
+        	    
+        	},
+        	complete: function( done ) {
+
+        	    button.html( label );
+
+        	}
+        });
 	});
 });

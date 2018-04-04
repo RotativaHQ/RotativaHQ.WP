@@ -96,25 +96,15 @@ class Rotativa_Admin {
 		 * class.
 		 */
 
-        $options = get_option( $this->plugin_name . '-settings' );
-        $api_key = $options['api-key'];
-        $endpoint = $options['end-point-location'];
-
         wp_enqueue_script( $this->plugin_name . '-axios', '//unpkg.com/axios/dist/axios.min.js', array( 'jquery' ), '0.18.0', true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-admin.js', array( 'jquery' ), $this->version, true );
-        if ( isset( $api_key ) && isset( $endpoint ) && ! empty( $api_key ) && ! empty( $endpoint ) ) {
-
-            wp_localize_script(
-                $this->plugin_name,
-                'rotativa',
-                [
-                    'api_key'   => $api_key,
-                    'endpoint'  => $endpoint,
-                    'permalink' => esc_url( get_permalink( get_the_ID() ) )
-                ]
-            );
-
-        }
+        wp_localize_script(
+            $this->plugin_name,
+            'rotativa',
+            [
+            	'ajaxurl' => admin_url( 'admin-ajax.php' )
+            ]
+        );
 
 	}
 
@@ -481,7 +471,7 @@ class Rotativa_Admin {
 
 	 public function display_metabox() {
 
-		 ?>
+		?>
 		 	<div class="rotativa-hq-metabox">
 				<button class="button toggle-popup"><?php echo esc_html__( 'Generate a PDF', 'rotativa' ); ?></button>
 				<span class="spinner"></span>
@@ -542,13 +532,100 @@ class Rotativa_Admin {
 							</div>
 						</div>
 						<div>
-							<button class="button button-primary rotativa-generate-pdf" data-object-id="<?php echo esc_attr( get_the_ID() ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'rotativa_generate_pdf_nonce' ) ); ?>"><?php echo esc_html__( 'Generate a PDF', 'rotativa' ); ?></button>
+							<button class="button button-primary rotativa-generate-pdf" data-object-id="<?php echo esc_attr( get_the_ID() ); ?>" data-nonce="<?php echo esc_attr( wp_create_nonce( 'rotativa_generate_pdf_nonce' ) ); ?>" data-id="<?php echo esc_attr( get_the_ID() ); ?>" data-active-label="<?php echo esc_attr__( 'Generating...', 'rotativa' ); ?>"><?php echo esc_html__( 'Generate a PDF', 'rotativa' ); ?></button>
 						</div>
 					</div>
 				</div>
 			</div>
-		 <?php
+		<?php
 
-	 }
+	}
+
+	public function ajax_generate_pdf() {
+
+		// Check the nonce.
+		if ( ! wp_verify_nonce( $_POST['nonce'], 'rotativa_generate_pdf_nonce' ) ) {
+
+			wp_send_json_error( esc_html__( 'Nonce check has failed.', 'rotativa' ) );
+			exit;
+
+		}
+
+		$options   = get_option( $this->plugin_name . '-settings' );
+		$api_key   = $options['api-key'];
+		$endpoint  = $options['end-point-location'];
+		$permalink = get_permalink( $_POST['id'] );
+
+		$file_name     = $_POST['file_name'];
+		$margin_top    = $_POST['margin_top'];
+		$margin_right  = $_POST['margin_right'];
+		$margin_bottom = $_POST['margin_bottom'];
+		$margin_left   = $_POST['margin_left'];
+		$gray          = $_POST['gray'];
+
+		$remote_args = [
+			'headers' => [
+				'X-ApiKey' => $api_key
+			],
+			'body'    => [
+				'htmlUrl' => $permalink
+			]
+		];
+
+		if ( isset( $file_name ) && ! empty( $file_name ) ) {
+
+			$remote_args['body']['filename'] = $file_name;
+
+		}
+
+		if ( isset( $margin_top ) && ! empty( $margin_top ) ) {
+
+			$remote_args['body']['pageMargins']['top'] = $margin_top;
+
+		}
+
+		if ( isset( $margin_right ) && ! empty( $margin_right ) ) {
+
+			$remote_args['body']['pageMargins']['right'] = $margin_right;
+
+		}
+
+		if ( isset( $margin_bottom ) && ! empty( $margin_bottom ) ) {
+
+			$remote_args['body']['pageMargins']['bottom'] = $margin_bottom;
+
+		}
+
+		if ( isset( $margin_left ) && ! empty( $margin_left ) ) {
+
+			$remote_args['body']['pageMargins']['left'] = $margin_left;
+
+		}
+
+		if ( isset( $gray ) && ! empty( $gray ) ) {
+
+			$remote_args['body']['isGrayScale'] = $gray;
+
+		}
+
+		$response = wp_remote_post( $endpoint, $remote_args );
+
+		if ( is_wp_error( $response ) ) {
+
+			echo '<pre>';
+			var_dump( $response->get_error_message() );
+			echo '</pre>';
+			exit;
+
+		} else {
+
+			echo '<pre>';
+			var_dump( $response );
+			echo '</pre>';
+			exit;
+
+		}
+
+	}
 
 }

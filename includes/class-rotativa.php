@@ -168,6 +168,9 @@ class Rotativa {
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'register_metabox' );
 
+		$this->loader->add_action( 'wp_ajax_ajax_generate_pdf', $plugin_admin, 'ajax_generate_pdf' );
+		$this->loader->add_action( 'wp_ajax_nopriv_ajax_generate_pdf', $plugin_admin, 'ajax_generate_pdf' );
+
 	}
 
 	/**

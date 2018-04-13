@@ -2,8 +2,8 @@
 Contributors: rotativahq, ratkosolaja
 Donate link: https://rotativahq.com/
 Tags: html, pdf, cloud
-Requires at least: 4.0
-Tested up to: 4.9.1
+Requires at least: 4.7
+Tested up to: 4.9.5
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,10 @@ Using the WordPress Admin Plugin Upload:
 == Frequently Asked Questions ==
 
 == Screenshots ==
+1. Post/Page or any Custom Post Type screen where Rotativa is enabled.
+2. Modal opened when clicking on the "Generate a PDF" button where you can customize the output PDF.
+3. Success alert and button that upon click event prompts you to save the PDF to your local machine.
+4. Settings screen for Rotativa plugin where you can configure Rotativa in numerous ways as well as choose your Endpoint Location.
 
 == Changelog ==
 

@@ -5,6 +5,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		
 		$('.rotativa-hq-popup-settings').addClass('is-active');
+		$('#pdf-item-file-name').focus();
 	});
 	$('.rotativa-hq-popup-settings-overlay').on('click', function(event) {
 		event.preventDefault();
@@ -97,14 +98,23 @@ jQuery(document).ready(function($) {
         		id: id,
         		action: 'ajax_generate_pdf'
         	},
-        	beforeSend: function( before ) {
+        	beforeSend: function() {
 
         	    button.html( label_active );
 
         	},
         	success: function( response ) {
 
-        		console.log( response );
+        		if ( response.success === true ) {
+        		  var data = JSON.parse( response.data );
+
+        		  swal({
+                title: rotativa.pdf_success.title,
+                type: 'success',
+                html: '<p>' + rotativa.pdf_success.description + '</p><p><a href="' + data.pdfUrl + '" class="button is-primary" download>' + rotativa.pdf_success.button_label + '</a></p>',
+                showConfirmButton: false
+              });
+						}
 
         	},
         	error: function( response ) {
@@ -112,9 +122,10 @@ jQuery(document).ready(function($) {
         	    console.log( response );
         	    
         	},
-        	complete: function( done ) {
+        	complete: function() {
 
         	    button.html( label );
+        	    $('.rotativa-hq-popup-settings').removeClass('is-active');
 
         	}
         });

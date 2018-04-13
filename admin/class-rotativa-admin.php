@@ -72,7 +72,7 @@ class Rotativa_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
+        wp_enqueue_style( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'css/sweetalert2.min.css', array(), '7.18.0', 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rotativa-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -96,13 +96,18 @@ class Rotativa_Admin {
 		 * class.
 		 */
 
-        wp_enqueue_script( $this->plugin_name . '-axios', '//unpkg.com/axios/dist/axios.min.js', array( 'jquery' ), '0.18.0', true );
+        wp_enqueue_script( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'js/sweetalert2.min.js', array( 'jquery' ), '7.18.0', true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-admin.js', array( 'jquery' ), $this->version, true );
         wp_localize_script(
             $this->plugin_name,
             'rotativa',
             [
-            	'ajaxurl' => admin_url( 'admin-ajax.php' )
+            	'ajaxurl' => admin_url( 'admin-ajax.php' ),
+                'pdf_success' => [
+                    'title' => esc_html__( 'Success!', 'rotativa' ),
+                    'description' => esc_html__( 'We have successfully generated your PDF. You can click the button below to download it.', 'rotativa' ),
+                    'button_label' => esc_html__( 'Download PDF', 'rotativa' )
+                ]
             ]
         );
 
@@ -194,23 +199,23 @@ class Rotativa_Admin {
 				'options'     => [
 					'eu-north-ireland' => [
 						'name' => __( 'EU North - Ireland', 'rotativa' ),
-						'url'  => '//eunorth.rotativahq.com/'
+						'url'  => 'https://eunorth.rotativahq.com/'
 					],
 					'us-west-california' => [
 						'name' => __( 'US West - California', 'rotativa' ),
-						'url'  => '//uswest.rotativahq.com/'
+						'url'  => 'https://uswest.rotativahq.com/'
 					],
 					'us-east-virginia' => [
 						'name' => __( 'US East - Virginia', 'rotativa' ),
-						'url'  => '//useast.rotativahq.com/'
+						'url'  => 'https://useast.rotativahq.com/'
 					],
 					'southeast-asia-singapore' => [
 						'name' => __( 'Southeast Asia - Singapore', 'rotativa' ),
-						'url'  => '//asiase.rotativahq.com/'
+						'url'  => 'https://asiase.rotativahq.com/'
 					],
 					'australia-east-sydney' => [
 						'name' => __( 'Australia East - Sydney', 'rotativa' ),
-						'url'  => '//ausea.rotativahq.com/'
+						'url'  => 'https://ausea.rotativahq.com/'
 					]
 				]
 			]
@@ -568,8 +573,10 @@ class Rotativa_Admin {
 				'X-ApiKey' => $api_key
 			],
 			'body'    => [
-				'htmlUrl' => $permalink
-			]
+				'htmlUrl'    => $permalink,
+                'returnLink' => true
+			],
+            'timeout' => '10'
 		];
 
 		if ( isset( $file_name ) && ! empty( $file_name ) ) {
@@ -608,21 +615,15 @@ class Rotativa_Admin {
 
 		}
 
+		$remote_args['body'] = json_encode( $remote_args['body'] );
+
 		$response = wp_remote_post( $endpoint, $remote_args );
 
-		if ( is_wp_error( $response ) ) {
+		if ( ! is_wp_error( $response ) ) {
 
-			echo '<pre>';
-			var_dump( $response->get_error_message() );
-			echo '</pre>';
-			exit;
+		    $body = wp_remote_retrieve_body( $response );
 
-		} else {
-
-			echo '<pre>';
-			var_dump( $response );
-			echo '</pre>';
-			exit;
+		    wp_send_json_success( $body );
 
 		}
 

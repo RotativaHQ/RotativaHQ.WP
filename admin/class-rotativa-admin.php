@@ -59,7 +59,7 @@ class Rotativa_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function rotativa_enqueue_styles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -82,7 +82,7 @@ class Rotativa_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function rotativa_enqueue_scripts() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -118,7 +118,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_settings_page() {
+	public function rotativa_register_settings_page() {
 
 		add_submenu_page(
 			'tools.php',
@@ -126,7 +126,7 @@ class Rotativa_Admin {
 			__( 'Rotativa', 'rotativa' ),
 			'manage_options',
 			'rotativa',
-			[ $this, 'display_settings_page' ]
+			[ $this, 'rotativa_display_settings_page' ]
 		);
 
 	}
@@ -136,7 +136,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function display_settings_page() {
+	public function rotativa_display_settings_page() {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/rotativa-admin-display.php';
 
@@ -147,25 +147,25 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_settings() {
+	public function rotativa_register_settings() {
 
 		register_setting(
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings',
-			[ $this, 'sandbox_register_settings' ]
+			[ $this, 'rotativa_sandbox_register_settings' ]
 		);
 
 		add_settings_section(
 			$this->plugin_name . '-settings-section',
 			__( 'Rotativa Settings', 'rotativa' ),
-			[ $this, 'sandbox_add_settings_section' ],
+			[ $this, 'rotativa_sandbox_add_settings_section' ],
 			$this->plugin_name . '-settings'
 		);
 
 		add_settings_field(
 			'post-types',
 			__( 'Post Types', 'rotativa' ),
-			[ $this, 'sandbox_add_settings_field_multiple_checkbox' ],
+			[ $this, 'rotativa_sandbox_add_settings_field_multiple_checkbox' ],
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings-section',
 			[
@@ -177,12 +177,12 @@ class Rotativa_Admin {
 		add_settings_field(
 			'api-key',
 			__( 'API Key', 'rotativa' ),
-			[ $this, 'sandbox_add_settings_field_input_general' ],
+			[ $this, 'rotativa_sandbox_add_settings_field_input_general' ],
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings-section',
 			[
 				'label_for'   => 'api-key',
-				'description' => __( 'Please enter your API Key. You can get it from <a href="https://rotativahq.com/" target="_blank">here</a>.', 'rotativa' ),
+				'description' => esc_html__( 'Please enter your API Key. You can get it from <a href="https://rotativahq.com/" target="_blank">here</a>.', 'rotativa' ),
 				'type'        => 'password'
 			]
 		);
@@ -190,31 +190,31 @@ class Rotativa_Admin {
 		add_settings_field(
 			'end-point-location',
 			__( 'Endpoint Location', 'rotativa' ),
-			[ $this, 'sandbox_add_settings_field_select' ],
+			[ $this, 'rotativa_sandbox_add_settings_field_select' ],
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings-section',
 			[
 				'label_for'   => 'end-point-location',
-				'description' => __( 'Choose the location that is nearest to your location.', 'rotativa' ),
+				'description' => esc_html__( 'Choose the location that is nearest to your location.', 'rotativa' ),
 				'options'     => [
 					'eu-north-ireland' => [
-						'name' => __( 'EU North - Ireland', 'rotativa' ),
+						'name' => esc_html__( 'EU North - Ireland', 'rotativa' ),
 						'url'  => 'https://eunorth.rotativahq.com/'
 					],
 					'us-west-california' => [
-						'name' => __( 'US West - California', 'rotativa' ),
+						'name' => esc_html__( 'US West - California', 'rotativa' ),
 						'url'  => 'https://uswest.rotativahq.com/'
 					],
 					'us-east-virginia' => [
-						'name' => __( 'US East - Virginia', 'rotativa' ),
+						'name' => esc_html__( 'US East - Virginia', 'rotativa' ),
 						'url'  => 'https://useast.rotativahq.com/'
 					],
 					'southeast-asia-singapore' => [
-						'name' => __( 'Southeast Asia - Singapore', 'rotativa' ),
+						'name' => esc_html__( 'Southeast Asia - Singapore', 'rotativa' ),
 						'url'  => 'https://asiase.rotativahq.com/'
 					],
 					'australia-east-sydney' => [
-						'name' => __( 'Australia East - Sydney', 'rotativa' ),
+						'name' => esc_html__( 'Australia East - Sydney', 'rotativa' ),
 						'url'  => 'https://ausea.rotativahq.com/'
 					]
 				]
@@ -228,7 +228,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function sandbox_register_setting( $input ) {
+	public function rotativa_sandbox_register_setting( $input ) {
 
 		$new_input = [];
 
@@ -252,7 +252,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function sandbox_add_settings_section() {
+	public function rotativa_sandbox_add_settings_section() {
 
 		return;
 
@@ -265,7 +265,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function sandbox_add_settings_field_single_checkbox( $args ) {
+	public function rotativa_sandbox_add_settings_field_single_checkbox( $args ) {
 
 		$field_id = $args['label_for'];
 		$field_description = $args['description'];
@@ -297,7 +297,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function sandbox_add_settings_field_multiple_checkbox( $args ) {
+	public function rotativa_sandbox_add_settings_field_multiple_checkbox( $args ) {
 
 		$field_id = $args['label_for'];
 		$field_description = $args['description'];
@@ -383,7 +383,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function sandbox_add_settings_field_input_general( $args ) {
+	public function rotativa_sandbox_add_settings_field_input_general( $args ) {
 
 		$field_id = $args['label_for'];
 		$field_description = $args['description'];
@@ -414,7 +414,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	public function sandbox_add_settings_field_select( $args ) {
+	public function rotativa_sandbox_add_settings_field_select( $args ) {
 
 		$field_id = $args['label_for'];
 		$field_description = $args['description'];
@@ -447,7 +447,7 @@ class Rotativa_Admin {
 	 *
 	 * @since 1.0.0
 	 */
-	 public function action_links( $links ) {
+	 public function rotativa_action_links( $links ) {
 
 		 $links[] = '<a href="'. esc_url( get_admin_url(null, 'tools.php?page=rotativa') ) .'">' . __( 'Settings', 'rotativa' ) . '</a>';
 
@@ -455,7 +455,7 @@ class Rotativa_Admin {
 
 	 }
 
-	 public function register_metabox() {
+	 public function rotativa_register_metabox() {
 
 		 $options = get_option( $this->plugin_name . '-settings' );
 		 $option = $options['post-types'];
@@ -465,7 +465,7 @@ class Rotativa_Admin {
 			 add_meta_box(
 				 'rotativa-side-metabox',
 				 __( 'RotativaHQ', 'rotativa' ),
-				 [ $this, 'display_metabox' ],
+				 [ $this, 'rotativa_display_metabox' ],
 				 $option,
 				 'side'
 			 );
@@ -474,7 +474,7 @@ class Rotativa_Admin {
 
 	 }
 
-	 public function display_metabox() {
+	 public function rotativa_display_metabox() {
 
 		?>
 		 	<div class="rotativa-hq-metabox">
@@ -546,7 +546,7 @@ class Rotativa_Admin {
 
 	}
 
-	public function ajax_generate_pdf() {
+	public function rotativa_ajax_generate_pdf() {
 
 		// Check the nonce.
 		if ( ! wp_verify_nonce( $_POST['nonce'], 'rotativa_generate_pdf_nonce' ) ) {
@@ -556,17 +556,20 @@ class Rotativa_Admin {
 
 		}
 
+		$post_id = filter_var( $_POST['id'], FILTER_VALIDATE_INT );
+		$post_id = preg_replace( '/[^0-9]/', '', $post_id );
+
 		$options   = get_option( $this->plugin_name . '-settings' );
 		$api_key   = $options['api-key'];
 		$endpoint  = $options['end-point-location'];
-		$permalink = get_permalink( $_POST['id'] );
+		$permalink = get_permalink( $post_id );
 
-		$file_name     = $_POST['file_name'];
-		$margin_top    = $_POST['margin_top'];
-		$margin_right  = $_POST['margin_right'];
-		$margin_bottom = $_POST['margin_bottom'];
-		$margin_left   = $_POST['margin_left'];
-		$gray          = $_POST['gray'];
+		$file_name     = sanitize_file_name( $_POST['file_name'] );
+		$margin_top    = preg_replace( '/[^0-9]/', '', filter_var( $_POST['margin_top'], FILTER_VALIDATE_INT ) );
+		$margin_right  = preg_replace( '/[^0-9]/', '', filter_var( $_POST['margin_right'], FILTER_VALIDATE_INT ) );
+		$margin_bottom = preg_replace( '/[^0-9]/', '', filter_var( $_POST['margin_bottom'], FILTER_VALIDATE_INT ) );
+		$margin_left   = preg_replace( '/[^0-9]/', '', filter_var( $_POST['margin_left'], FILTER_VALIDATE_INT ) );
+		$gray          = filter_var( $_POST['gray'], FILTER_VALIDATE_BOOLEAN );
 
 		$remote_args = [
 			'headers' => [

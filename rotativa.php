@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'PLUGIN_VERSION', '1.0.0' );
+define( 'ROTATIVA_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
@@ -38,7 +38,7 @@ define( 'PLUGIN_VERSION', '1.0.0' );
  */
 function activate_rotativa() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-rotativa-activator.php';
-	Rotativa_Activator::activate();
+	Rotativa_Activator::rotativa_activate();
 }
 
 /**
@@ -47,7 +47,7 @@ function activate_rotativa() {
  */
 function deactivate_rotativa() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-rotativa-deactivator.php';
-	Rotativa_Deactivator::deactivate();
+	Rotativa_Deactivator::rotativa_deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_rotativa' );
@@ -71,7 +71,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-rotativa.php';
 function run_rotativa() {
 
 	$plugin = new Rotativa();
-	$plugin->run();
+	$plugin->rotativa_run();
 
 }
 run_rotativa();

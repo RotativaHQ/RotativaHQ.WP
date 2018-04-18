@@ -67,17 +67,17 @@ class Rotativa {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'PLUGIN_VERSION' ) ) {
-			$this->version = PLUGIN_VERSION;
+		if ( defined( 'ROTATIVA_VERSION' ) ) {
+			$this->version = ROTATIVA_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'rotativa';
 
-		$this->load_dependencies();
-		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_public_hooks();
+		$this->rotativa_load_dependencies();
+		$this->rotativa_set_locale();
+		$this->rotativa_define_admin_hooks();
+		$this->rotativa_define_public_hooks();
 
 	}
 
@@ -97,7 +97,7 @@ class Rotativa {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function rotativa_load_dependencies() {
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
@@ -135,11 +135,11 @@ class Rotativa {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function rotativa_set_locale() {
 
 		$plugin_i18n = new Rotativa_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->rotativa_add_action( 'plugins_loaded', $plugin_i18n, 'rotativa_load_plugin_textdomain' );
 
 	}
 
@@ -150,26 +150,26 @@ class Rotativa {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function rotativa_define_admin_hooks() {
 
-		$plugin_admin = new Rotativa_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Rotativa_Admin( $this->rotativa_get_plugin_name(), $this->rotativa_get_version() );
 
 		// Hook our settings page
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_settings_page' );
+		$this->loader->rotativa_add_action( 'admin_menu', $plugin_admin, 'rotativa_register_settings_page' );
 
 		// Hook our settings
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_settings' );
+		$this->loader->rotativa_add_action( 'admin_init', $plugin_admin, 'rotativa_register_settings' );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->rotativa_add_action( 'admin_enqueue_scripts', $plugin_admin, 'rotativa_enqueue_styles' );
+		$this->loader->rotativa_add_action( 'admin_enqueue_scripts', $plugin_admin, 'rotativa_enqueue_scripts' );
 
 		// Hook our plugin links
-		$this->loader->add_action( 'plugin_action_links_rotativa/rotativa.php', $plugin_admin, 'action_links' );
+		$this->loader->rotativa_add_action( 'plugin_action_links_rotativa/rotativa.php', $plugin_admin, 'rotativa_action_links' );
 
-		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'register_metabox' );
+		$this->loader->rotativa_add_action( 'add_meta_boxes', $plugin_admin, 'rotativa_register_metabox' );
 
-		$this->loader->add_action( 'wp_ajax_ajax_generate_pdf', $plugin_admin, 'ajax_generate_pdf' );
-		$this->loader->add_action( 'wp_ajax_nopriv_ajax_generate_pdf', $plugin_admin, 'ajax_generate_pdf' );
+		$this->loader->rotativa_add_action( 'wp_ajax_rotativa_ajax_generate_pdf', $plugin_admin, 'rotativa_ajax_generate_pdf' );
+		$this->loader->rotativa_add_action( 'wp_ajax_nopriv_rotativa_ajax_generate_pdf', $plugin_admin, 'rotativa_ajax_generate_pdf' );
 
 	}
 
@@ -180,12 +180,12 @@ class Rotativa {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function rotativa_define_public_hooks() {
 
-		$plugin_public = new Rotativa_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Rotativa_Public( $this->rotativa_get_plugin_name(), $this->rotativa_get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->rotativa_add_action( 'wp_enqueue_scripts', $plugin_public, 'rotativa_enqueue_styles' );
+		$this->loader->rotativa_add_action( 'wp_enqueue_scripts', $plugin_public, 'rotativa_enqueue_scripts' );
 
 	}
 
@@ -194,8 +194,8 @@ class Rotativa {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
-		$this->loader->run();
+	public function rotativa_run() {
+		$this->loader->rotativa_run();
 	}
 
 	/**
@@ -205,7 +205,7 @@ class Rotativa {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function rotativa_get_plugin_name() {
 		return $this->plugin_name;
 	}
 
@@ -215,7 +215,7 @@ class Rotativa {
 	 * @since     1.0.0
 	 * @return    Rotativa_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function rotativa_get_loader() {
 		return $this->loader;
 	}
 
@@ -225,7 +225,7 @@ class Rotativa {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function rotativa_get_version() {
 		return $this->version;
 	}
 

@@ -96,7 +96,7 @@ jQuery(document).ready(function($) {
         		gray: gray,
         		nonce: nonce,
         		id: id,
-        		action: 'ajax_generate_pdf'
+        		action: 'rotativa_ajax_generate_pdf'
         	},
         	beforeSend: function() {
 

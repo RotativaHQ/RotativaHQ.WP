@@ -1,0 +1,151 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-02 13:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: admin/class-rotativa-admin.php:100 public/class-rotativa-public.php:100
+msgid "Success!"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:101 public/class-rotativa-public.php:101
+msgid ""
+"We have successfully generated your PDF. You can click the button below to "
+"download it."
+msgstr ""
+
+#: admin/class-rotativa-admin.php:102 public/class-rotativa-public.php:102
+msgid "Download PDF"
+msgstr ""
+
+#. Name of the plugin
+#: admin/class-rotativa-admin.php:127 admin/class-rotativa-admin.php:128
+msgid "Rotativa"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:162
+msgid "Rotativa Settings"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:169
+msgid "Post Types"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:175
+msgid ""
+"Check post types were you want to show Rotativa Interface for Converting "
+"HTML to PDF."
+msgstr ""
+
+#: admin/class-rotativa-admin.php:181
+msgid "API Key"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:187
+msgid ""
+"Please enter your API Key. You can get it from <a href=\"https://rotativahq."
+"com/\" target=\"_blank\">here</a>."
+msgstr ""
+
+#: admin/class-rotativa-admin.php:194
+msgid "Endpoint Location"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:200
+msgid "Choose the location that is nearest to your location."
+msgstr ""
+
+#: admin/class-rotativa-admin.php:203
+msgid "EU North - Ireland"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:207
+msgid "US West - California"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:211
+msgid "US East - Virginia"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:215
+msgid "Southeast Asia - Singapore"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:219
+msgid "Australia East - Sydney"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:454
+msgid "Settings"
+msgstr ""
+
+#. Author of the plugin
+#: admin/class-rotativa-admin.php:469
+msgid "RotativaHQ"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:483 admin/class-rotativa-admin.php:542
+msgid "Generate a PDF"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:491
+msgid "File Name:"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:496
+msgid "Additional Settings"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:501
+msgid "Page Top Margin:"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:509
+msgid "Page Right Margin:"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:517
+msgid "Page Bottom Margin:"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:525
+msgid "Page Left Margin:"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:536
+msgid "Is Grayscale?"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:542 public/class-rotativa-public.php:113
+msgid "Generating..."
+msgstr ""
+
+#: admin/class-rotativa-admin.php:556 public/class-rotativa-public.php:160
+msgid "Nonce check has failed."
+msgstr ""
+
+#: public/class-rotativa-public.php:112 public/class-rotativa-public.php:146
+msgid "Generate PDF"
+msgstr ""
+
+#. Description of the plugin
+msgid "Convert HTML to PDF in the cloud in a extremely easy and fast way."
+msgstr ""
+
+#. URI of the plugin
+msgid "https://wordpress.org/plugins/search/rotativa/"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://rotativahq.com/"
+msgstr ""

@@ -1778,3 +1778,14 @@
 .control.is-loading.is-large:after {
   font-size: 1.5rem;
 }
+.rotativa-inline {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 10px;
+}
+.rotativa-inline strong {
+  display: block;
+}
+.rotativa-inline input[type="number"] {
+  width: 50px;
+}

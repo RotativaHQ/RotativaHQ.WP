@@ -73,7 +73,7 @@ class Rotativa_Public {
 		 * class.
 		 */
 
-        wp_enqueue_style( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'css/sweetalert2.min.css', array(), '7.21.1', 'all' );
+        wp_enqueue_style( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'css/sweetalert2.min.css', array(), '7.26.11', 'all' );
 
 	}
 
@@ -102,7 +102,7 @@ class Rotativa_Public {
             'button_label' => esc_html__( 'Download PDF', 'rotativa' )
         ] );
 
-        wp_enqueue_script( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'js/sweetalert2.min.js', array( 'jquery' ), '7.21.1', true );
+        wp_enqueue_script( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'js/sweetalert2.min.js', array( 'jquery' ), '7.26.11', true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-public.js', array( 'jquery' ), $this->version, true );
 		wp_localize_script(
 		    $this->plugin_name,
@@ -127,7 +127,8 @@ class Rotativa_Public {
 	    // Attributes
         $atts = shortcode_atts(
             [
-                'ID' => 0
+                'ID' => 0,
+                'label' => ''
             ],
             $atts,
             'rotativa-generate-pdf'
@@ -143,7 +144,126 @@ class Rotativa_Public {
 
         }
 
-	    $html = '<button class="rotativa-generate-pdf-fe" data-nonce="' . wp_create_nonce( 'rotativa_generate_pdf_fe_nonce' ) . '" data-id="' . esc_attr( $ID ) . '">' . esc_html__( 'Generate PDF', 'rotativa' ) . '</button>';
+        if ( isset( $atts['label'] ) && ! empty( $atts['label'] ) ) {
+
+        	$label = $atts['label'];
+
+        } else {
+
+        	$label = esc_html__( 'Generate PDF', 'rotativa' );
+
+        }
+
+        // Button Styling
+        $options = get_option( $this->plugin_name . '-settings' );
+        $background_color = $options['button-style-background-color'];
+        $text_color       = $options['button-style-text-color'];
+        $border           = $options['button-style-border'];
+        $padding          = $options['button-style-padding'];
+        $margin           = $options['button-style-margin'];
+
+        $css_append = '';
+
+        if ( isset( $background_color ) && ! empty( $background_color ) ) {
+
+        	$css_append .= 'background-color: ' . esc_attr( $background_color ) . ';';
+
+        }
+
+        if ( isset( $text_color ) && ! empty( $text_color ) ) {
+
+        	$css_append .= 'color: ' . esc_attr( $text_color ) . ';';
+
+        }
+
+        if ( isset( $border ) && ! empty( $border ) ) {
+
+        	if ( isset( $border['width'] ) && ! empty( $border['width'] ) && $border['width'] != 0 ) {
+
+        		$css_append .= 'border-width: ' . esc_attr( $border['width'] ) . 'px;';
+        		$css_append .= 'border-style: solid;';
+
+        	}
+
+        	if ( isset( $border['radius'] ) && ! empty( $border['radius'] ) && $border['radius'] != 0 ) {
+
+        		$css_append .= 'border-radius: ' . esc_attr( $border['radius'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $border['color'] ) && ! empty( $border['color'] ) ) {
+
+        		$css_append .= 'border-color: ' . esc_attr( $border['color'] ) . ';';
+
+        	}
+
+        }
+
+        if ( isset( $padding ) && ! empty( $padding ) ) {
+
+        	if ( isset( $padding['top'] ) && ! empty( $padding['top'] ) && $padding['top'] != 0 ) {
+
+        		$css_append .= 'padding-top: ' . esc_attr( $padding['top'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $padding['right'] ) && ! empty( $padding['right'] ) && $padding['right'] != 0 ) {
+
+        		$css_append .= 'padding-right: ' . esc_attr( $padding['right'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $padding['bottom'] ) && ! empty( $padding['bottom'] ) && $padding['bottom'] != 0 ) {
+
+        		$css_append .= 'padding-bottom: ' . esc_attr( $padding['bottom'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $padding['left'] ) && ! empty( $padding['left'] ) && $padding['left'] != 0 ) {
+
+        		$css_append .= 'padding-left: ' . esc_attr( $padding['left'] ) . 'px;';
+
+        	}
+
+        }
+
+        if ( isset( $margin ) && ! empty( $margin ) ) {
+
+        	if ( isset( $margin['top'] ) && ! empty( $margin['top'] ) && $margin['top'] != 0 ) {
+
+        		$css_append .= 'margin-top: ' . esc_attr( $margin['top'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $margin['right'] ) && ! empty( $margin['right'] ) && $margin['right'] != 0 ) {
+
+        		$css_append .= 'margin-right: ' . esc_attr( $margin['right'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $margin['bottom'] ) && ! empty( $margin['bottom'] ) && $margin['bottom'] != 0 ) {
+
+        		$css_append .= 'margin-bottom: ' . esc_attr( $margin['bottom'] ) . 'px;';
+
+        	}
+
+        	if ( isset( $margin['left'] ) && ! empty( $margin['left'] ) && $margin['left'] != 0 ) {
+
+        		$css_append .= 'margin-left: ' . esc_attr( $margin['left'] ) . 'px;';
+
+        	}
+
+        }
+
+        $css = '<style>
+        	button.rotativa-generate-pdf-fe {
+        		' . $css_append . '
+        	}
+        </style>';
+
+	    $html = '<button class="rotativa-generate-pdf-fe" data-nonce="' . wp_create_nonce( 'rotativa_generate_pdf_fe_nonce' ) . '" data-id="' . esc_attr( $ID ) . '">' . esc_html( $label ) . '</button>';
+
+	    $html .= $css;
 
 	    return apply_filters( 'rotativa_generate_pdf_shortcode_html', $html );
 

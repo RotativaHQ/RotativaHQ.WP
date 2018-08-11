@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-11 09:38+0000\n"
+"POT-Creation-Date: 2018-06-02 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -29,132 +29,112 @@ msgid "Download PDF"
 msgstr ""
 
 #. Name of the plugin
-#: admin/class-rotativa-admin.php:128 admin/class-rotativa-admin.php:129
+#: admin/class-rotativa-admin.php:127 admin/class-rotativa-admin.php:128
 msgid "Rotativa"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:163
+#: admin/class-rotativa-admin.php:162
 msgid "Rotativa Settings"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:170
-msgid "Rotativa Styling"
-msgstr ""
-
-#: admin/class-rotativa-admin.php:177
+#: admin/class-rotativa-admin.php:169
 msgid "Post Types"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:183
+#: admin/class-rotativa-admin.php:175
 msgid ""
 "Check post types were you want to show Rotativa Interface for Converting "
 "HTML to PDF."
 msgstr ""
 
-#: admin/class-rotativa-admin.php:189
+#: admin/class-rotativa-admin.php:181
 msgid "API Key"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:195
+#: admin/class-rotativa-admin.php:187
 msgid ""
 "Please enter your API Key. You can get it from <a href=\"https://rotativahq."
 "com/\" target=\"_blank\">here</a>."
 msgstr ""
 
-#: admin/class-rotativa-admin.php:202
+#: admin/class-rotativa-admin.php:194
 msgid "Endpoint Location"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:208
+#: admin/class-rotativa-admin.php:200
 msgid "Choose the location that is nearest to your location."
 msgstr ""
 
-#: admin/class-rotativa-admin.php:211
+#: admin/class-rotativa-admin.php:203
 msgid "EU North - Ireland"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:215
+#: admin/class-rotativa-admin.php:207
 msgid "US West - California"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:219
+#: admin/class-rotativa-admin.php:211
 msgid "US East - Virginia"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:223
+#: admin/class-rotativa-admin.php:215
+msgid "Southeast Asia - Singapore"
+msgstr ""
+
+#: admin/class-rotativa-admin.php:219
 msgid "Australia East - Sydney"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:232
-msgid "Button Background Color"
-msgstr ""
-
-#: admin/class-rotativa-admin.php:243
-msgid "Button Text Color"
-msgstr ""
-
-#: admin/class-rotativa-admin.php:254
-msgid "Button Border"
-msgstr ""
-
-#: admin/class-rotativa-admin.php:265
-msgid "Button Padding"
-msgstr ""
-
-#: admin/class-rotativa-admin.php:276
-msgid "Button Margin"
-msgstr ""
-
-#: admin/class-rotativa-admin.php:648
+#: admin/class-rotativa-admin.php:454
 msgid "Settings"
 msgstr ""
 
 #. Author of the plugin
-#: admin/class-rotativa-admin.php:663
+#: admin/class-rotativa-admin.php:469
 msgid "RotativaHQ"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:677 admin/class-rotativa-admin.php:736
+#: admin/class-rotativa-admin.php:483 admin/class-rotativa-admin.php:542
 msgid "Generate a PDF"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:685
+#: admin/class-rotativa-admin.php:491
 msgid "File Name:"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:690
+#: admin/class-rotativa-admin.php:496
 msgid "Additional Settings"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:695
+#: admin/class-rotativa-admin.php:501
 msgid "Page Top Margin:"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:703
+#: admin/class-rotativa-admin.php:509
 msgid "Page Right Margin:"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:711
+#: admin/class-rotativa-admin.php:517
 msgid "Page Bottom Margin:"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:719
+#: admin/class-rotativa-admin.php:525
 msgid "Page Left Margin:"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:730
+#: admin/class-rotativa-admin.php:536
 msgid "Is Grayscale?"
 msgstr ""
 
-#: admin/class-rotativa-admin.php:736 public/class-rotativa-public.php:113
+#: admin/class-rotativa-admin.php:542 public/class-rotativa-public.php:113
 msgid "Generating..."
 msgstr ""
 
-#: admin/class-rotativa-admin.php:750 public/class-rotativa-public.php:280
+#: admin/class-rotativa-admin.php:556 public/class-rotativa-public.php:160
 msgid "Nonce check has failed."
 msgstr ""
 
-#: public/class-rotativa-public.php:112 public/class-rotativa-public.php:153
+#: public/class-rotativa-public.php:112 public/class-rotativa-public.php:146
 msgid "Generate PDF"
 msgstr ""
 

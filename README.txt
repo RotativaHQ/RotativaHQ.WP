@@ -3,8 +3,8 @@ Contributors: rotativahq, ratkosolaja
 Donate link: https://rotativahq.com/
 Tags: html, pdf, cloud
 Requires at least: 4.7
-Tested up to: 4.9.6
-Stable tag: 1.1.0
+Tested up to: 4.9.8
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -47,8 +47,8 @@ Using the WordPress Admin Plugin Upload:
    Yes, we do. It's **[rotativa-generate-pdf]**
 2. Does your shortcode accept any attributes?
 
-   In fast, it does, only one. It accepts an ID of the page. Example:
-   [rotativa-generate-pdf ID="300"]
+   In fact, it does - it accepts **ID** and **label**. Example:
+   [rotativa-generate-pdf ID="300" label="Generate PDF"]
 
 == Screenshots ==
 1. Post/Page or any Custom Post Type screen where Rotativa is enabled.
@@ -57,6 +57,15 @@ Using the WordPress Admin Plugin Upload:
 4. Settings screen for Rotativa plugin where you can configure Rotativa in numerous ways as well as choose your Endpoint Location.
 
 == Changelog ==
+
+= 1.2.0 =
+* Added ability to change the styling of the frontend button (border, margin, padding, background color and text color).
+* Removed the "Southeast Asia - Singapore" API Endpoint Location.
+* Added new shortcode attribute (label) so you can change the label of the button.
+* Updated template for translations.
+
+= 1.1.1 =
+* Fixed a bug in admin area where html would be escaped and not render the anchor tag.
 
 = 1.1.0 =
 * Introducing a **new feature** - now you can place a shortcode in your template with which your users can generate a pdf of that page themselves. You can use this shortcode: **[rotativa-generate-pdf]**

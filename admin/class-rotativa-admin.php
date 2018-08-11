@@ -72,7 +72,7 @@ class Rotativa_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-        wp_enqueue_style( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'css/sweetalert2.min.css', array(), '7.21.1', 'all' );
+        wp_enqueue_style( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'css/sweetalert2.min.css', array(), '7.26.11', 'all' );
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/rotativa-admin.css', array(), $this->version, 'all' );
 
 	}
@@ -102,8 +102,9 @@ class Rotativa_Admin {
             'button_label' => esc_html__( 'Download PDF', 'rotativa' )
         ] );
 
-        wp_enqueue_script( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'js/sweetalert2.min.js', array( 'jquery' ), '7.21.1', true );
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-admin.js', array( 'jquery' ), $this->version, true );
+        wp_enqueue_style( 'wp-color-picker' );
+        wp_enqueue_script( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'js/sweetalert2.min.js', array( 'jquery' ), '7.26.11', true );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-admin.js', array( 'jquery', 'wp-color-picker' ), $this->version, true );
         wp_localize_script(
             $this->plugin_name,
             'rotativa',
@@ -159,39 +160,46 @@ class Rotativa_Admin {
 
 		add_settings_section(
 			$this->plugin_name . '-settings-section',
-			__( 'Rotativa Settings', 'rotativa' ),
+			esc_html__( 'Rotativa Settings', 'rotativa' ),
+			[ $this, 'rotativa_sandbox_add_settings_section' ],
+			$this->plugin_name . '-settings'
+		);
+
+		add_settings_section(
+			$this->plugin_name . '-styling-section',
+			esc_html__( 'Rotativa Styling', 'rotativa' ),
 			[ $this, 'rotativa_sandbox_add_settings_section' ],
 			$this->plugin_name . '-settings'
 		);
 
 		add_settings_field(
 			'post-types',
-			__( 'Post Types', 'rotativa' ),
+			esc_html__( 'Post Types', 'rotativa' ),
 			[ $this, 'rotativa_sandbox_add_settings_field_multiple_checkbox' ],
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings-section',
 			[
 				'label_for'   => 'post-types',
-				'description' => __( 'Check post types were you want to show Rotativa Interface for Converting HTML to PDF.', 'rotativa' )
+				'description' => esc_html__( 'Check post types were you want to show Rotativa Interface for Converting HTML to PDF.', 'rotativa' )
 			]
 		);
 
 		add_settings_field(
 			'api-key',
-			__( 'API Key', 'rotativa' ),
+			esc_html__( 'API Key', 'rotativa' ),
 			[ $this, 'rotativa_sandbox_add_settings_field_input_general' ],
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings-section',
 			[
 				'label_for'   => 'api-key',
-				'description' => esc_html__( 'Please enter your API Key. You can get it from <a href="https://rotativahq.com/" target="_blank">here</a>.', 'rotativa' ),
+				'description' => wp_kses( __( 'Please enter your API Key. You can get it from <a href="https://rotativahq.com/" target="_blank">here</a>.', 'rotativa' ), [ 'a' => [ 'href' => [], 'target' => [] ] ] ),
 				'type'        => 'password'
 			]
 		);
 
 		add_settings_field(
 			'end-point-location',
-			__( 'Endpoint Location', 'rotativa' ),
+			esc_html__( 'Endpoint Location', 'rotativa' ),
 			[ $this, 'rotativa_sandbox_add_settings_field_select' ],
 			$this->plugin_name . '-settings',
 			$this->plugin_name . '-settings-section',
@@ -211,15 +219,66 @@ class Rotativa_Admin {
 						'name' => esc_html__( 'US East - Virginia', 'rotativa' ),
 						'url'  => 'https://useast.rotativahq.com/'
 					],
-					'southeast-asia-singapore' => [
-						'name' => esc_html__( 'Southeast Asia - Singapore', 'rotativa' ),
-						'url'  => 'https://asiase.rotativahq.com/'
-					],
 					'australia-east-sydney' => [
 						'name' => esc_html__( 'Australia East - Sydney', 'rotativa' ),
 						'url'  => 'https://ausea.rotativahq.com/'
 					]
 				]
+			]
+		);
+
+		add_settings_field(
+			'button-style-background-color',
+			esc_html__( 'Button Background Color', 'rotativa' ),
+			[ $this, 'rotativa_sandbox_add_settings_field_colorpicker' ],
+			$this->plugin_name . '-settings',
+			$this->plugin_name . '-styling-section',
+			[
+				'label_for' => 'button-style-background-color'
+			]
+		);
+
+		add_settings_field(
+			'button-style-text-color',
+			esc_html__( 'Button Text Color', 'rotativa' ),
+			[ $this, 'rotativa_sandbox_add_settings_field_colorpicker' ],
+			$this->plugin_name . '-settings',
+			$this->plugin_name . '-styling-section',
+			[
+				'label_for' => 'button-style-text-color'
+			]
+		);
+
+		add_settings_field(
+			'button-style-border',
+			esc_html__( 'Button Border', 'rotativa' ),
+			[ $this, 'rotativa_sandbox_add_settings_field_border' ],
+			$this->plugin_name . '-settings',
+			$this->plugin_name . '-styling-section',
+			[
+				'label_for' => 'button-style-border'
+			]
+		);
+
+		add_settings_field(
+			'button-style-padding',
+			esc_html__( 'Button Padding', 'rotativa' ),
+			[ $this, 'rotativa_sandbox_add_settings_field_padding_margin' ],
+			$this->plugin_name . '-settings',
+			$this->plugin_name . '-styling-section',
+			[
+				'label_for' => 'button-style-padding'
+			]
+		);
+
+		add_settings_field(
+			'button-style-margin',
+			esc_html__( 'Button Margin', 'rotativa' ),
+			[ $this, 'rotativa_sandbox_add_settings_field_padding_margin' ],
+			$this->plugin_name . '-settings',
+			$this->plugin_name . '-styling-section',
+			[
+				'label_for' => 'button-style-margin'
 			]
 		);
 
@@ -439,6 +498,141 @@ class Rotativa_Admin {
 			<?php endforeach; ?>
 		</select>
 		<p class="description"><?php echo esc_html( $field_description ); ?></p>
+
+		<?php
+
+	}
+
+	public function rotativa_sandbox_add_settings_field_colorpicker( $args ) {
+
+		$field_id = $args['label_for'];
+		$field_options = $args['options'];
+
+		$options = get_option( $this->plugin_name . '-settings' );
+		$option = '';
+
+		if ( ! empty( $options[ $field_id ] ) ) {
+
+			$option = $options[ $field_id ];
+
+		}
+
+		?>
+
+		<input type="text" name="<?php echo $this->plugin_name . '-settings[' . $field_id . ']'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . ']'; ?>" value="<?php echo esc_attr( $option ); ?>" class="rotativa-colorpicker" />
+
+		<?php
+
+	}
+
+	public function rotativa_sandbox_add_settings_field_border( $args ) {
+
+		$field_id = $args['label_for'];
+		$field_options = $args['options'];
+
+		$options = get_option( $this->plugin_name . '-settings' );
+		$border_width = 0;
+		$border_color = 'transparent';
+		$border_radius = 0;
+
+		if ( ! empty( $options[ $field_id ] ) ) {
+
+			if ( isset( $options[ $field_id ]['width'] ) && ! empty( $options[ $field_id ]['width'] ) ) {
+
+				$border_width = $options[ $field_id ]['width'];
+
+			}
+
+			if ( isset( $options[ $field_id ]['color'] ) && ! empty( $options[ $field_id ]['color'] ) ) {
+
+				$border_color = $options[ $field_id ]['color'];
+
+			}
+
+			if ( isset( $options[ $field_id ]['radius'] ) && ! empty( $options[ $field_id ]['radius'] ) ) {
+
+				$border_radius = $options[ $field_id ]['radius'];
+
+			}
+
+		}
+
+		?>
+
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Width:', 'rotativa' ); ?></strong>
+				<input type="number" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][width]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][width]'; ?>" value="<?php echo $border_width; ?>">
+			</p>
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Radius:', 'rotativa' ); ?></strong>
+				<input type="number" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][radius]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][radius]'; ?>" value="<?php echo $border_radius; ?>">
+			</p>
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Color:', 'rotativa' ); ?></strong>
+				<input type="text" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][color]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][color]'; ?>" value="<?php echo $border_color; ?>" class="rotativa-colorpicker">
+			</p>
+
+		<?php
+
+	}
+
+	public function rotativa_sandbox_add_settings_field_padding_margin( $args ) {
+
+		$field_id = $args['label_for'];
+		$field_options = $args['options'];
+
+		$options = get_option( $this->plugin_name . '-settings' );
+		$padding_margin_top = 0;
+		$padding_margin_right = 0;
+		$padding_margin_bottom = 0;
+		$padding_margin_left = 0;
+
+		if ( ! empty( $options[ $field_id ] ) ) {
+
+			if ( isset( $options[ $field_id ]['top'] ) && ! empty( $options[ $field_id ]['top'] ) ) {
+
+				$padding_margin_top = $options[ $field_id ]['top'];
+
+			}
+
+			if ( isset( $options[ $field_id ]['right'] ) && ! empty( $options[ $field_id ]['right'] ) ) {
+
+				$padding_margin_right = $options[ $field_id ]['right'];
+
+			}
+
+			if ( isset( $options[ $field_id ]['bottom'] ) && ! empty( $options[ $field_id ]['bottom'] ) ) {
+
+				$padding_margin_bottom = $options[ $field_id ]['bottom'];
+
+			}
+
+			if ( isset( $options[ $field_id ]['left'] ) && ! empty( $options[ $field_id ]['left'] ) ) {
+
+				$padding_margin_left = $options[ $field_id ]['left'];
+
+			}
+
+		}
+
+		?>
+
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Top:', 'rotativa' ); ?></strong>
+				<input type="number" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][top]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][top]'; ?>" value="<?php echo $padding_margin_top; ?>">
+			</p>
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Right:', 'rotativa' ); ?></strong>
+				<input type="number" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][right]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][right]'; ?>" value="<?php echo $padding_margin_right; ?>">
+			</p>
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Bottom:', 'rotativa' ); ?></strong>
+				<input type="number" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][bottom]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][bottom]'; ?>" value="<?php echo $padding_margin_bottom; ?>">
+			</p>
+			<p class="rotativa-inline">
+				<strong><?php echo esc_html( 'Left:', 'rotativa' ); ?></strong>
+				<input type="number" name="<?php echo $this->plugin_name . '-settings[' . $field_id . '][left]'; ?>" id="<?php echo $this->plugin_name . '-settings[' . $field_id . '][left]'; ?>" value="<?php echo $padding_margin_left; ?>">
+			</p>
 
 		<?php
 

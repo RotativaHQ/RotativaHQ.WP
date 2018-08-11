@@ -130,4 +130,8 @@ jQuery(document).ready(function($) {
         	}
         });
 	});
+
+    if ( $('.rotativa-colorpicker').length ) {
+        $('.rotativa-colorpicker').wpColorPicker();
+    }
 });

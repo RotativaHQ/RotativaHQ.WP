@@ -16,7 +16,7 @@
  * Plugin Name:       Rotativa
  * Plugin URI:        https://wordpress.org/plugins/search/rotativa/
  * Description:       Convert HTML to PDF in the cloud in a extremely easy and fast way.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Author:            RotativaHQ
  * Author URI:        https://rotativahq.com/
  * License:           GPL-2.0+
@@ -30,7 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'ROTATIVA_VERSION', '1.1.0' );
+define( 'ROTATIVA_VERSION', '1.2.0' );
 
 /**
  * The code that runs during plugin activation.

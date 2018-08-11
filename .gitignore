@@ -116,3 +116,6 @@ prepros-6.config
 
 # Resources
 #.src/
+
+mix-manifest.json
+package-lock.json

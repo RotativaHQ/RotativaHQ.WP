@@ -127,7 +127,7 @@ class Rotativa_Public {
 	    // Attributes
         $atts = shortcode_atts(
             [
-                'ID' => 0,
+                'ID' => '',
                 'label' => ''
             ],
             $atts,

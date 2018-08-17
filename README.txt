@@ -8,19 +8,19 @@ Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Convert HTML to PDF in the cloud in a extremely easy and fast way.
+Convert posts and pages to PDF in the cloud in a extremely easy and fast way, Back End and Front End.
 
-== Description ==
+== Description 
 
-Rotativa WP plugin enables you to convert HTML to PDF in the cloud in a extremely easy and fast way.
+Rotativa WP plugin enables you to convert WordPress posts and pages to PDF in the cloud in a extremely easy and fast way.
 Main features:
-1. Easy to Use - Convert HTML or URL to PDF with a click of a button.
-2. Works Everywhere - Create PDF from five endpoints in four continents: Europe, US East, US West, Southeast Asia, Australia East.
-3. Made for Cloud - Our systems are based on Microsft Azure. Optimized for Azure Web Apps (Websites).
+1. Easy to Use - Convert posts and pages to PDF both in Back End and in Front End.
+2. Works Everywhere - Create PDF from four endpoints in three continents: Europe, US East, US West, Australia East.
+3. Made for Cloud - Our systems are based on Microsft Azure cloud infrastructure.
 4. Always On - Our infrastructure complies with Azure SLA requirements to achieve at least 99.95% availability.
-5. Best Performance - A dedicated communication protocol and smart leverage on the best Azure resources yield top performance in creating PDF files. Most PDFs are served in under 1 second.
+5. Best Performance - A smart leverage on the best Azure resources yield top performance in creating PDF files. Most PDFs are served in under 1 second.
 6. Secure - Every aspect is secured by 2048 bit SSL encryption. Users download PDF files directly from one of 4 different Azure Storage data centers in a secure and private way.
-7. Developer Friendly - There is no need to use absolute URL in web page components (img, css, font). Creating PDF files on local machine is transparent.
+7. Developer Friendly - There is no need to use PHP code to create PDF documents in the Back End or Front End.
 
 == Installation ==
 
@@ -47,7 +47,7 @@ Using the WordPress Admin Plugin Upload:
    Yes, we do. It's **[rotativa-generate-pdf]**
 2. Does your shortcode accept any attributes?
 
-   In fact, it does - it accepts **ID** and **label**. Example:
+   In fact, it does - it accepts **ID** of the post/page and **label**. Example:
    [rotativa-generate-pdf ID="300" label="Generate PDF"]
 
 == Screenshots ==

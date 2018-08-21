@@ -101,6 +101,9 @@ class Rotativa_Public {
             'description'  => esc_html__( 'We have successfully generated your PDF. You can click the button below to download it.', 'rotativa' ),
             'button_label' => esc_html__( 'Download PDF', 'rotativa' )
         ] );
+        $pdf_error = apply_filters( 'rotativa_pdf_error_fe', [
+            'title' => esc_html__( 'Error!', 'rotativa' )
+        ] );
 
         wp_enqueue_script( $this->plugin_name . '-sweetalert2', plugin_dir_url( __FILE__ ) . 'js/sweetalert2.min.js', array( 'jquery' ), '7.26.11', true );
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/rotativa-public.js', array( 'jquery' ), $this->version, true );
@@ -111,7 +114,8 @@ class Rotativa_Public {
                 'ajaxurl'        => admin_url( 'admin-ajax.php' ),
                 'generate_pdf'   => esc_html__( 'Generate PDF', 'rotativa' ),
                 'generating_pdf' => esc_html__( 'Generating...', 'rotativa' ),
-                'pdf_success' => $pdf_success
+                'pdf_success'    => $pdf_success,
+                'pdf_error'      => $pdf_error
             ]
         );
 
@@ -127,7 +131,7 @@ class Rotativa_Public {
 	    // Attributes
         $atts = shortcode_atts(
             [
-                'ID' => '',
+                'ID' => 0,
                 'label' => ''
             ],
             $atts,

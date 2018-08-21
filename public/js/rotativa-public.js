@@ -23,12 +23,24 @@ jQuery(document).ready(function($) {
         if ( response.success === true ) {
           var data = JSON.parse( response.data );
 
-          swal({
-            title: rotativa.pdf_success.title,
-            type: 'success',
-            html: '<p>' + rotativa.pdf_success.description + '</p><p><a href="' + data.pdfUrl + '" class="button is-primary" download>' + rotativa.pdf_success.button_label + '</a></p>',
-            showConfirmButton: false
-          });
+          if ( data.error ) {
+
+            swal({
+              type: 'error',
+              title: rotativa.pdf_error.title,
+              text: data.error
+            });
+
+          } else {
+
+            swal({
+              title: rotativa.pdf_success.title,
+              type: 'success',
+              html: '<p>' + rotativa.pdf_success.description + '</p><p><a href="' + data.pdfUrl + '" class="button is-primary" download>' + rotativa.pdf_success.button_label + '</a></p>',
+              showConfirmButton: false
+            });
+
+          }
         }
       },
       error: function( response ) {

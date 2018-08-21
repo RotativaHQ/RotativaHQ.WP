@@ -112,7 +112,6 @@ class Rotativa_Public {
             'rotativa',
             [
                 'ajaxurl'        => admin_url( 'admin-ajax.php' ),
-                'generate_pdf'   => esc_html__( 'Generate PDF', 'rotativa' ),
                 'generating_pdf' => esc_html__( 'Generating...', 'rotativa' ),
                 'pdf_success'    => $pdf_success,
                 'pdf_error'      => $pdf_error
@@ -131,16 +130,16 @@ class Rotativa_Public {
 	    // Attributes
         $atts = shortcode_atts(
             [
-                'ID' => 0,
+                'id' => '',
                 'label' => ''
             ],
             $atts,
             'rotativa-generate-pdf'
         );
 
-        if ( isset( $atts['ID'] ) && ! empty( $atts['ID'] ) && $atts['ID'] !== 0 ) {
+        if ( isset( $atts['id'] ) && ! empty( $atts['id'] ) && $atts['id'] !== 0 ) {
 
-            $ID = $atts['ID'];
+            $ID = $atts['id'];
 
         } else {
 

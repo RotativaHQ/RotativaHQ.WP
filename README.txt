@@ -4,7 +4,7 @@ Donate link: https://rotativahq.com/
 Tags: html, pdf, cloud
 Requires at least: 4.7
 Tested up to: 4.9.8
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,7 +48,7 @@ Using the WordPress Admin Plugin Upload:
 2. Does your shortcode accept any attributes?
 
    In fact, it does - it accepts **ID** and **label**. Example:
-   [rotativa-generate-pdf ID="300" label="Generate PDF"]
+   [rotativa-generate-pdf id="300" label="Generate PDF"]
 
 == Screenshots ==
 1. Post/Page or any Custom Post Type screen where Rotativa is enabled.
@@ -57,6 +57,9 @@ Using the WordPress Admin Plugin Upload:
 4. Settings screen for Rotativa plugin where you can configure Rotativa in numerous ways as well as choose your Endpoint Location.
 
 == Changelog ==
+
+= 1.2.3 =
+* Fixed various bugs.
 
 = 1.2.2 =
 * Fixed a bug where sweetalert2 wasn't loading on frontend.

@@ -6,7 +6,8 @@ jQuery(document).ready(function($) {
 
     var button = $(this),
         nonce  = button.data('nonce'),
-        id     = button.data('id');
+        id     = button.data('id'),
+        text   = button.text();
 
     $.ajax({
       type: 'POST',
@@ -47,7 +48,7 @@ jQuery(document).ready(function($) {
         console.log( response );
       },
       complete: function() {
-        button.html( rotativa.generate_pdf );
+        button.html( text );
       }
     });
   });

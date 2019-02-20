@@ -211,10 +211,6 @@ class Rotativa_Admin {
 						'name' => esc_html__( 'EU North - Ireland', 'rotativa' ),
 						'url'  => 'https://eunorth.rotativahq.com/'
 					],
-					'us-west-california' => [
-						'name' => esc_html__( 'US West - California', 'rotativa' ),
-						'url'  => 'https://uswest.rotativahq.com/'
-					],
 					'us-east-virginia' => [
 						'name' => esc_html__( 'US East - Virginia', 'rotativa' ),
 						'url'  => 'https://useast.rotativahq.com/'

@@ -3,7 +3,7 @@ Contributors: rotativahq, ratkosolaja
 Donate link: https://rotativahq.com/
 Tags: html, pdf, cloud
 Requires at least: 4.7
-Tested up to: 4.9.8
+Tested up to: 5.0.3
 Stable tag: 1.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,7 +15,7 @@ Convert HTML to PDF in the cloud in a extremely easy and fast way.
 Rotativa WP plugin enables you to convert HTML to PDF in the cloud in a extremely easy and fast way.
 Main features:
 1. Easy to Use - Convert HTML or URL to PDF with a click of a button.
-2. Works Everywhere - Create PDF from five endpoints in four continents: Europe, US East, US West, Southeast Asia, Australia East.
+2. Works Everywhere – Create PDF from three endpoints in Europe, US, Australia.
 3. Made for Cloud - Our systems are based on Microsft Azure. Optimized for Azure Web Apps (Websites).
 4. Always On - Our infrastructure complies with Azure SLA requirements to achieve at least 99.95% availability.
 5. Best Performance - A dedicated communication protocol and smart leverage on the best Azure resources yield top performance in creating PDF files. Most PDFs are served in under 1 second.

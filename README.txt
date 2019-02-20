@@ -4,7 +4,7 @@ Donate link: https://rotativahq.com/
 Tags: html, pdf, cloud
 Requires at least: 4.7
 Tested up to: 5.0.3
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

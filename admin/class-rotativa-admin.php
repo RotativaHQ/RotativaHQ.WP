@@ -149,6 +149,7 @@ class Rotativa_Admin {
 	 * Register settings for our settings page.
 	 *
 	 * @since 1.0.0
+	 * @version 1.2.4
 	 */
 	public function rotativa_register_settings() {
 
